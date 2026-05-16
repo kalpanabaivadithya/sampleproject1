@@ -1,4 +1,4 @@
-import chatbot as st
+import ai_chatbot as st
 from openai import OpenAI
 
 # Set page title
