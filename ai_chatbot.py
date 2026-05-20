@@ -1,54 +1,27 @@
-import ai_chatbot as st
-from openai import OpenAI
+print("🤖 Chatbot Started")
+print("Type 'exit' to stop chatting\n")
 
-# Set page title
-st.set_page_config(page_title="Gen AI Chatbot")
+while True:
+    user = input("You: ").lower()
 
-st.title("🤖 Gen AI Chatbot")
-st.write("Ask anything and get AI responses")
+    if user == "exit":
+        print("Chatbot: Goodbye!")
+        break
 
-# Enter API key
-api_key = st.text_input("Enter OpenAI API Key:", type="password")
+    elif user == "heloo" or user == "hello" or user == "hi":
+        print("Chatbot: Hii! How can I help you?")
 
-if api_key:
-    client = OpenAI(api_key=api_key)
+    elif "how are you" in user:
+        print("Chatbot: I am fine. How about you?")
 
-    # Store chat history
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
+    elif "your name" in user:
+        print("Chatbot: I am a Python Chatbot.")
 
-    # Display previous messages
-    for msg in st.session_state.messages:
-        with st.chat_message(msg["role"]):
-            st.markdown(msg["content"])
+    elif "python" in user:
+        print("Chatbot: Python is a programming language.")
 
-    # User input
-    user_input = st.chat_input("Type your message here...")
+    elif "bye" in user:
+        print("Chatbot: Bye! Have a nice day.")
 
-    if user_input:
-        # Save user message
-        st.session_state.messages.append(
-            {"role": "user", "content": user_input}
-        )
-
-        with st.chat_message("user"):
-            st.markdown(user_input)
-
-        # Get AI response
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=st.session_state.messages
-        )
-
-        bot_reply = response.choices[0].message.content
-
-        # Save bot response
-        st.session_state.messages.append(
-            {"role": "assistant", "content": bot_reply}
-        )
-
-        with st.chat_message("assistant"):
-            st.markdown(bot_reply)
-
-else:
-    st.warning("Please enter your OpenAI API key")
+    else:
+        print("Chatbot: Sorry, I didn't understand that.")
